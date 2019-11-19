@@ -13,7 +13,7 @@ export const renderListItem = function(deck) {
         <section class="section" style="border-bottom-style: solid; border-width: 0.5px">
         <div class="container">
             <div class="content has-text-left">
-                <div class="title deckname" id="${deck.id}" style="color: white">${deck.name}</div>
+                <div class="title deckname" id="${deck.id}">${deck.name}</div>
                 <div class="subtitle" style="color: white">${deck.address}</div>
                 <div class="subtitle" style="color:white">Notes: ${deck.description}</div>
             </div>
@@ -24,9 +24,7 @@ export const renderListItem = function(deck) {
 }
 
 export const loadMap = function() {
-    console.log(event.target.id);
     let deck = parkingDecks.find(function(element) {
-        console.log(element.id);
         return element.id == event.target.id;
     });
 

@@ -2,7 +2,7 @@ body {
     margin: 0 auto;
     width: 100%;
     background-color: #26323A;
-    color: white;
+    /* color: white; */
 }
 #root1 {
     padding-top:0;
@@ -43,6 +43,10 @@ a {
 }
 
 a:hover {
+    color: #437272;
+}
+
+div.deckname:hover {
     color: #437272;
 }
 
