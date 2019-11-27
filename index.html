@@ -14,14 +14,159 @@
 </head>
 
 <body>
+    <!-- Nav Bar -->
     <header>
-        <a href="index.html" style="padding-top: 10px; padding-left: 10px;"><i class="fas fa-home fa-2x"></i></a>
-        <div class="name" style="font-size: 3em;">Sparc</div>
-        <a href="index.html" style="padding-top: 10px; padding-right: 10px;"><i class="fas fa-user fa-2x"></i></a>
+          </nav>
+          <div class="navbar-menu">
+            <div class="navbar-start">
+              <!-- navbar items -->
+              <div class="navbar-item">
+                  <a>SPARC</a>
+              </div>
+            </div>
+          
+            <div class="navbar-end">
+              <!-- navbar items -->
+              <div class="navbar-item">
+                <div class="buttons">
+                  <a class="button is-primary" id="myAccount">
+                    <strong>My Account</strong>
+                  </a>
+                  <a class="button is-primary" id="logout">
+                      <strong>Logout</strong>
+                    </a>
+                    <a class="button is-primary" id="createDeck">
+                      <strong>Create Deck</strong>
+                    </a>
+                    <a class="button is-primary" id="login">
+                      <strong>Login</strong>
+                    </a>
+                    <a class="button is-primary" id="signup">
+                      <strong>Sign up</strong>
+                    </a>
+              </div>
+            </div>
+            </div>
+          </div>
     </header>
+
+    <!-- My Account Modal -->
+    <div class="modal" id = myAccountModal>
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">My Account</p>
+            <button class="delete" aria-label="close" id="myAccountClose"></button>
+          </header>
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            <p>this is a modal</p>
+          </section>
+          <footer class="modal-card-foot">
+          </footer>
+        </div>
+      </div>
+    
+      <!-- Create Deck Modal -->
+      <div class="modal" id = createDeckModal>
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Create Deck</p>
+                <button class="delete" aria-label="close" id="createDeckClose"></button>
+              </header>
+              <section class="modal-card-body">
+                <!-- Content ... -->
+                <div class="field">
+                        <label class="label">Deck name</label>
+                        <div class="control">
+                          <input class="input" type="text" placeholder="e.g Cobb Deck">
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Deck address</label>
+                        <div class="control">
+                          <input class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
+                        </div>
+                      </div>
+
+                      <div class="field">
+                            <label class="label">Notes</label>
+                            <div class="control">
+                              <input class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
+                            </div>
+                          </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Create Deck</button>
+              </footer>
+            </div>
+          </div>
+    
+            <!-- Login Modal -->
+    <div class="modal" id = loginModal>
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Login</p>
+                <button class="delete" aria-label="close" id="loginClose"></button>
+              </header>
+              <section class="modal-card-body">
+                <!-- Content ... -->
+                <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control">
+                          <input class="input" type="text" placeholder="e.g alexsmith@gmail.com">
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                          <input class="input" type="email" placeholder="Your password">
+                        </div>
+                      </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Login</button>
+              </footer>
+            </div>
+          </div>
+
+            <!-- Sign up -->
+    <div class="modal" id = signupModal>
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Sign up</p>
+                <button class="delete" aria-label="close" id="signupClose"></button>
+              </header>
+              <section class="modal-card-body">
+                <!-- Content ... -->
+                <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control">
+                          <input class="input" type="text" placeholder="e.g alexsmith@gmail.com">
+                        </div>
+                      </div>
+                      
+                      <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                          <input class="input" type="email" placeholder="Your password">
+                        </div>
+                      </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button class="button is-success">Sign up</button>
+              </footer>
+            </div>
+          </div>
+
     <section class="section" id="section1">
         <div id="intro">
-            <h1 class="title">Find Parking</h1>
+            <h1 class="title">Find Parking at UNC</h1>
             <form autocomplete="off" action="/action_page.php">
                 <div class="autocomplete" style="width:300px;">
                     <input id="myInput" type="text" name="myAddress" placeholder="Address"
@@ -36,6 +181,33 @@
     <section class="section" id="root1">
         <div id="root"></div>
     </section>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCoOVgjVJLB-Si2R8ZExJM97uf_wRQ0W20",
+    authDomain: "sparc-a9e63.firebaseapp.com",
+    databaseURL: "https://sparc-a9e63.firebaseio.com",
+    projectId: "sparc-a9e63",
+    appId: "1:233989368975:web:d7bc030e1cf598ca6214fa",
+    measurementId: "G-TPV9EY5M2F"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// update firestore settings
+// db.settings({timestampsInSnapshots: true})
+</script>
+
     <script src="data.js"></script>
     <script src="autocomplete.js" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
