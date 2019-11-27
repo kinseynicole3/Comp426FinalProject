@@ -114,22 +114,24 @@
               </header>
               <section class="modal-card-body">
                 <!-- Content ... -->
+                <form id = "loginForm">
                 <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
-                          <input class="input" type="text" placeholder="e.g alexsmith@gmail.com">
+                          <input class="input" id="loginEmail" type="email" placeholder="e.g alexsmith@gmail.com">
                         </div>
                       </div>
                       
                       <div class="field">
                         <label class="label">Password</label>
                         <div class="control">
-                          <input class="input" type="email" placeholder="Your password">
+                          <input class="input" type="password" id="loginPassword" placeholder="Your password">
                         </div>
                       </div>
+                    </form>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-success">Login</button>
+                <button class="button is-success" id="loginButton">Login</button>
               </footer>
             </div>
           </div>
@@ -144,22 +146,24 @@
               </header>
               <section class="modal-card-body">
                 <!-- Content ... -->
+                <form id = "signupForm">
                 <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
-                          <input class="input" type="text" placeholder="e.g alexsmith@gmail.com">
+                          <input class="input" type="email" id="signupEmail" placeholder="e.g alexsmith@gmail.com">
                         </div>
                       </div>
                       
                       <div class="field">
                         <label class="label">Password</label>
                         <div class="control">
-                          <input class="input" type="email" placeholder="Your password">
+                          <input class="input" type="password" id="signupPassword" placeholder="Your password">
                         </div>
                       </div>
+                    </form>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-success">Sign up</button>
+                <button class="button is-success" id="signupButton">Sign up</button>
               </footer>
             </div>
           </div>
@@ -212,6 +216,7 @@ const db = firebase.firestore();
     <script src="autocomplete.js" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="src/index.js" type="module"></script>
+    <script src="src/auth.js" type="module"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 
