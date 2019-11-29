@@ -29,19 +29,21 @@
               <!-- navbar items -->
               <div class="navbar-item">
                 <div class="buttons">
+                  <!-- <li class = "loggedIn"> -->
                   <a class="button is-primary" id="myAccount">
                     <strong>My Account</strong>
+                  <!-- </li> -->
                   </a>
-                  <a class="button is-primary" id="logout">
+                  <a class="button is-primary" class = "loggedIn" id="logout">
                       <strong>Logout</strong>
                     </a>
-                    <a class="button is-primary" id="createDeck">
+                    <a class="button is-primary" class = "loggedIn" id="createDeck">
                       <strong>Create Deck</strong>
                     </a>
-                    <a class="button is-primary" id="login">
+                    <a class="button is-primary" class = "loggedOut" id="login">
                       <strong>Login</strong>
                     </a>
-                    <a class="button is-primary" id="signup">
+                    <a class="button is-primary" class = "loggedOut" id="signup">
                       <strong>Sign up</strong>
                     </a>
               </div>
@@ -77,29 +79,31 @@
               </header>
               <section class="modal-card-body">
                 <!-- Content ... -->
+                <form id = "createForm">
                 <div class="field">
                         <label class="label">Deck name</label>
                         <div class="control">
-                          <input class="input" type="text" placeholder="e.g Cobb Deck">
+                          <input id ="deck" class="input" type="text" placeholder="e.g Cobb Deck">
                         </div>
                       </div>
                       
                       <div class="field">
                         <label class="label">Deck address</label>
                         <div class="control">
-                          <input class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
+                          <input id="address" class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
                         </div>
                       </div>
 
                       <div class="field">
                             <label class="label">Notes</label>
                             <div class="control">
-                              <input class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
+                              <input id="notes" class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
                             </div>
                           </div>
+                        </form>
               </section>
               <footer class="modal-card-foot">
-                <button class="button is-success">Create Deck</button>
+                <button id="createDeckButton" class="button is-success">Create Deck</button>
               </footer>
             </div>
           </div>
@@ -182,6 +186,10 @@
         </div>
         </div>
     </section>
+    
+    <div class="decks" class = "logged-in">
+    </div>    
+    
     <section class="section" id="root1">
         <div id="root"></div>
     </section>
