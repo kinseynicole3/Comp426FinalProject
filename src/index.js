@@ -53,6 +53,18 @@ $(function() {
     loadParking();
 });
 
+const deckList = document.querySelector('.decks');
+
+const setupDecks = (data) => {
+
+    let html = '';
+    data.forEach(doc => {
+        const deck = doc.data();
+        console.log(deck)
+    })
+}
+
+
 export const renderListItem = function(deck) {
     return `
     <div id="${deck.id}">
