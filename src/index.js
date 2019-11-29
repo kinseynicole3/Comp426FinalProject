@@ -50,28 +50,9 @@ signupClose.onclick = function() {
 }
 
 $(function() {
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            console.log('user logged in', user);
-            loadParking();
-        } else {
-            console.log('user logged out');
-            //location.reload();
-        }
-    })
-    
+    loadParking();
 });
 
-const deckList = document.querySelector('.decks');
-
-const setupDecks = (data) => {
-
-    let html = '';
-    data.forEach(doc => {
-        const deck = doc.data();
-        console.log(deck)
-    })
-}
 
 
 export const renderListItem = function(deck) {
