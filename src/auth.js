@@ -11,6 +11,25 @@ auth.onAuthStateChanged(user => {
         }
 });
 
+// create new deck
+const createForm = document.querySelector('#createForm');
+const createButton = document.querySelector('#createDeckButton')
+createDeckButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    db.collection('decks').add({
+        deck: createForm['deck'].value,
+        address: createForm['address'].value,
+        notes: createForm['notes'].value
+    }).then(() => {
+        // close modal and reset form
+        const modal = document.querySelector('#createDeckModal');
+        modal.style.display = 'none';
+        createForm.reset();
+    })
+
+})
+
 // render decks
 const deckList = document.querySelector('.decks');
 
