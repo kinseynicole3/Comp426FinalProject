@@ -1,8 +1,17 @@
-// get data
-db.collection('decks').get().then(snapshot => {
-    setupDecks(snapshot.docs);
-})
+// listen for auth status changes
+auth.onAuthStateChanged(user => {
+    if (user) {
+        db.collection('decks').get().then(snapshot => {
+            setupDecks(snapshot.docs);
+            // setupUI(user);
+            });
+        } else {
+            // setupUI();
+            setupDecks([]);
+        }
+});
 
+// render decks
 const deckList = document.querySelector('.decks');
 
 const setupDecks = (data) => {
@@ -34,16 +43,25 @@ const setupDecks = (data) => {
     deckList.innerHTML = html;
 }
 
-// listen for auth status changes
-auth.onAuthStateChanged(user => {
-    if (user) {
-        console.log('user logged in', user);
-    } else {
-        console.log('user logged out');
-        //location.reload();
-        
-    }
-})
+// render UI
+
+const loggedOutLinks = document.querySelector('.loggedOut');
+const loggedInLinks = document.querySelector('.loggedIn');
+
+const setupUI = (user) => {
+if (user) {
+    // toggle UI elements
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+    console.log(loggedInLinks)
+    console.log(loggedOutLinks)
+} else {
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+    console.log(loggedInLinks)
+    console.log(loggedOutLinks)
+}
+}
 
 // sign up
 const signupForm = document.querySelector('#signupForm')
