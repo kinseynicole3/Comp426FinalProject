@@ -50,7 +50,16 @@ signupClose.onclick = function() {
 }
 
 $(function() {
-    loadParking();
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            console.log('user logged in', user);
+            loadParking();
+        } else {
+            console.log('user logged out');
+            //location.reload();
+        }
+    })
+    
 });
 
 export const renderListItem = function(deck) {

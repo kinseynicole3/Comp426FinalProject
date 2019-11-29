@@ -4,6 +4,8 @@ auth.onAuthStateChanged(user => {
         console.log('user logged in', user);
     } else {
         console.log('user logged out');
+        //location.reload();
+        
     }
 })
 
@@ -33,6 +35,7 @@ logout.addEventListener('click', (e) => {
     auth.signOut().then(() => {
         console.log("logged out");
     })
+    location.reload();
 })
 
 // login
