@@ -68,6 +68,14 @@ function autocomplete(inp, arr) {
     closeAllLists(e.target);
   });
 }
-
-var addresses = ["24 Kings Grant Road, Hockessin DE", "3 Colony Court, Chapel Hill NC", "309 Brookside Drive, Chapel Hill NC", "12 Stinson Street, Chapel Hill NC"];
-autocomplete(document.getElementById("myInput"), addresses);
+var array = [];
+db.collection('decks').get().then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+    var deckObjects = doc.data();
+    var address = deckObjects.address;
+    var spotname = deckObjects.deck;
+    array.push(address);
+    array.push(spotname);
+  });
+});
+autocomplete(document.getElementById("myInput"), array);

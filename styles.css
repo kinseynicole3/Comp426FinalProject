@@ -57,3 +57,33 @@ div.deckname:hover {
     text-align: left;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.bio-container1 {
+    width: 33.33%;
+    float: left;
+    background-color: #26323A;
+    color: white;
+}
+
+.bio-container2 {
+    width: 33.33%;
+    float: left;
+    background-color: #26323A;
+}
+
+.bio-container3 {
+    width: 33.34%;
+    float: left;
+    background-color: #26323A;
+}
+
+#sectionbios {
+    display: block;
+    padding: 0px 0px 0px 0px;
+    background-color: #26323A;
+    color: white;
+}
+
+.biocontent {
+    color: white;
+}
