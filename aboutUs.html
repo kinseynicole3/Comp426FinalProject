@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
 
     <link href='styles.css' rel='stylesheet' />
-    <title> Sparc </title>
+    <title> About Us </title>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
@@ -29,27 +29,25 @@
               <!-- navbar items -->
               <div class="navbar-item">
                 <div class="buttons">
-                  <a class="button is-primary" id="home" href = "index.html">
-                    <strong>Home</strong>
-                  </a>
-                <a class="button is-primary" id="aboutUs" href = "aboutUs.html">
-                    <strong>About Us</strong>
-                  </a>
-                  <!-- <li class = "loggedIn"> -->
+                    <a class="button is-primary" id="home" href = "index.html">
+                        <strong>Home</strong>
+                    </a>
+                    <a class="button is-primary" id="aboutUs">
+                        <strong>About Us</strong>
+                      </a>
                   <a class="button is-primary" id="myAccount">
                     <strong>My Account</strong>
-                  <!-- </li> -->
                   </a>
-                  <a class="button is-primary" class = "loggedIn" id="logout">
+                  <a class="button is-primary" id="logout">
                       <strong>Logout</strong>
                     </a>
-                    <a class="button is-primary" class = "loggedIn" id="createDeck">
+                    <a class="button is-primary" id="createDeck">
                       <strong>Create Deck</strong>
                     </a>
-                    <a class="button is-primary" class = "loggedOut" id="login">
+                    <a class="button is-primary" id="login">
                       <strong>Login</strong>
                     </a>
-                    <a class="button is-primary" class = "loggedOut" id="signup">
+                    <a class="button is-primary" id="signup">
                       <strong>Sign up</strong>
                     </a>
               </div>
@@ -85,31 +83,29 @@
               </header>
               <section class="modal-card-body">
                 <!-- Content ... -->
-                <form id = "createForm">
                 <div class="field">
                         <label class="label">Deck name</label>
                         <div class="control">
-                          <input id ="deck" class="input" type="text" placeholder="e.g Cobb Deck">
+                          <input class="input" type="text" placeholder="e.g Cobb Deck">
                         </div>
                       </div>
                       
                       <div class="field">
                         <label class="label">Deck address</label>
                         <div class="control">
-                          <input id="address" class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
+                          <input class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
                         </div>
                       </div>
 
                       <div class="field">
                             <label class="label">Notes</label>
                             <div class="control">
-                              <input id="notes" class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
+                              <input class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
                             </div>
                           </div>
-                        </form>
               </section>
               <footer class="modal-card-foot">
-                <button id="createDeckButton" class="button is-success">Create Deck</button>
+                <button class="button is-success">Create Deck</button>
               </footer>
             </div>
           </div>
@@ -180,25 +176,12 @@
 
     <section class="section" id="section1">
         <div id="intro">
-            <h1 class="title">Find Parking at UNC</h1>
-            <form autocomplete="off" action="/action_page.php">
-                <div class="autocomplete" style="width:300px;">
-                    <input id="myInput" type="text" name="myAddress" placeholder="Address"
-                        style="padding: 7px; padding-right: 100px">
-                    <input type="submit" value="Search" style="padding: 10px">
-                </div>
-
-            </form>
-        </div>
+            <h1 class="title">About Us</h1>
         </div>
     </section>
-    
-    <div class="decks" class = "logged-in">
-    </div>    
-    
-    <section class="section" id="root1">
-        <div id="root"></div>
-    </section>
+    <section class="section" >
+        <p> insert info here</p>    
+    </section> 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
