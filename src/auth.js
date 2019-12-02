@@ -39,27 +39,93 @@ const setupDecks = (data) => {
     data.forEach(doc => {
         const theDeck = doc.data();
         const div = `
-        <div class="card">
-      <div class="card-content">
-        <div>
-            <p class="title is-2">${theDeck.deck}</p>
-            <p class="subtitle is-4">${theDeck.address}</p>
-            <h1>${theDeck.notes}</p>
-        </div>
-      </div>
-      <footer class="card-footer">
-          <div class="buttons">
-              <button class="button is-primary">Save</button>
-              <button class="button is-primary">Edit</button>
-              <button class="button is-primary">Delete</button>
+        <div id="${theDeck.deck}></div>
+        <section class="section" style="border-bottom-style: solid; border-width: 0.5px; padding-top: 20px;">
+        <div class="container is-light">
+            <div class="content has-text-left">
+                <h1 class="title deckname" id="">${theDeck.deck}</h1>
+                <h2 class="subtitle">${theDeck.address}</h2>
+                <p class="subtitle">Notes: ${theDeck.notes}</p>
             </div>
-        </footer>
-    </div>
+        </div>
+          <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
+              <button class="button is-light">Save</button>
+              <button class="button is-light">Edit</button>
+              <button class="button is-light">Delete</button>
+            </div>
+        </div>
+        </section>
         `;
         html += div;
     });
 
     deckList.innerHTML = html;
+}
+export const loadMap = function() {
+    let deck = parkingDecks.find(function(element) {
+        return element.id == event.target.id;
+    });
+
+    $root.append(renderMap(deck.xCoordinate, deck.yCoordinate));
+}
+
+export const renderMap = function(x, y) {
+    return `
+    <div id='map' style='width: 400px; height: 300px;'></div>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiY29tcDQyNmZpbmFsIiwiYSI6ImNrMzZidGNsZDAwMzEzbXJ4bXFnM3loYjgifQ.gyiwVu9eUjqg-If1v-gK0A';
+            var map = new mapboxgl.Map({
+                container: 'map', 
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [${y}, ${x}],
+                zoom: 16 
+                });
+                map.addControl(new mapboxgl.NavigationControl());
+                map.on('load', function() {
+                    map.loadImage('./location1.png', function(error, image) {
+                        if (error) throw error;
+                        map.addImage('cat', image);
+                        map.addLayer({
+                            "id": "points",
+                            "type": "symbol",
+                            "source": {
+                            "type": "geojson",
+                            "data": {
+                            "type": "FeatureCollection",
+                            "features": [{
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [${y},${x}]
+                            }
+                        }]
+                        }
+                    },
+                    "layout": {
+                        "icon-image": "cat",
+                        "icon-size": 0.1
+                    }
+                });
+            });
+        });
+    </script>
+    `
+}
+
+export const loadParking = function() {
+    
+    parkingDecks.forEach(deck => {
+        $root.append(renderListItem(deck));
+    });
+    
+    $(document).on("click", ".deckname", function(event) {
+        event.preventDefault();
+        $section.empty();
+        $root.empty();
+        loadMap(event);
+    });
+
 }
 
 // render UI

@@ -2,236 +2,235 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
 
-    <link href='styles.css' rel='stylesheet' />
-    <title> Sparc </title>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+  <link href='styles.css' rel='stylesheet' />
+  <title> Sparc </title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
-    <!-- Nav Bar -->
-    <header>
-          </nav>
-          <div class="navbar-menu">
-            <div class="navbar-start">
-              <!-- navbar items -->
-              <div class="navbar-item">
-                  <a href="index.html">SPARC</a>
-              </div>
-            </div>
-          
+  <section class="hero is-primary is-medium">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <h1 class="title">SPARC</h1>
+            </a>
+            <a class="navbar-item is-active" href="index.html">
+                Home
+              </a>
+              <a class="navbar-item" id="aboutUs" href="aboutUs.html">
+                  About Us
+                </a>
+            <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
-              <!-- navbar items -->
-              <div class="navbar-item">
-                <div class="buttons">
-                  <a class="button is-primary" id="home" href = "index.html">
-                    <strong>Home</strong>
-                  </a>
-                <a class="button is-primary" id="aboutUs" href = "aboutUs.html">
-                    <strong>About Us</strong>
-                  </a>
-                  <!-- <li class = "loggedIn"> -->
-                  <a class="button is-primary" id="myAccount">
-                    <strong>My Account</strong>
-                  <!-- </li> -->
-                  </a>
-                  <a class="button is-primary" class = "loggedIn" id="logout">
-                      <strong>Logout</strong>
-                    </a>
-                    <a class="button is-primary" class = "loggedIn" id="createDeck">
-                      <strong>Create Deck</strong>
-                    </a>
-                    <a class="button is-primary" class = "loggedOut" id="login">
-                      <strong>Login</strong>
-                    </a>
-                    <a class="button is-primary" class = "loggedOut" id="signup">
-                      <strong>Sign up</strong>
-                    </a>
-              </div>
-            </div>
+              
+              <a class="navbar-item" id="myAccount">
+                My Account
+              </a>
+              <a class="navbar-item" class="loggedIn" id="logout">
+                Logout
+              </a>
+              <a class="navbar-item" class="loggedIn" id="createDeck">
+                Create Deck
+              </a>
+              <a class="navbar-item" class="loggedOut" id="login">
+                Login
+              </a>
+              <a class="navbar-item" class="loggedOut" id="signup">
+                Sign Up
+              </a>
+      
             </div>
           </div>
-    </header>
+        </div>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          Find Parking at UNC
+        </h1>
+        <div class="content has-text-centered">
+          <form autocomplete="off" action="/action_page.php">
+            <div class="autocomplete">
+              <input id="myInput" type="text" name="myAddress" placeholder="Address"
+                style="padding: 7px; padding-right: 100px">
+              <input type="submit" value="Search" style="padding: 10px">
+            </div>
+        </div>
+
+        </form>
+      </div>
+    </div>
 
     <!-- My Account Modal -->
-    <div class="modal" id = myAccountModal>
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">My Account</p>
-            <button class="delete" aria-label="close" id="myAccountClose"></button>
-          </header>
-          <section class="modal-card-body">
-            <!-- Content ... -->
-            <p>this is a modal</p>
-          </section>
-          <footer class="modal-card-foot">
-          </footer>
-        </div>
+    <div class="modal" id=myAccountModal>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">My Account</p>
+          <button class="delete" aria-label="close" id="myAccountClose"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <p>this is a modal</p>
+        </section>
+        <footer class="modal-card-foot">
+        </footer>
       </div>
-    
-      <!-- Create Deck Modal -->
-      <div class="modal" id = createDeckModal>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Create Deck</p>
-                <button class="delete" aria-label="close" id="createDeckClose"></button>
-              </header>
-              <section class="modal-card-body">
-                <!-- Content ... -->
-                <form id = "createForm">
-                <div class="field">
-                        <label class="label">Deck name</label>
-                        <div class="control">
-                          <input id ="deck" class="input" type="text" placeholder="e.g Cobb Deck">
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Deck address</label>
-                        <div class="control">
-                          <input id="address" class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
-                        </div>
-                      </div>
+    </div>
 
-                      <div class="field">
-                            <label class="label">Notes</label>
-                            <div class="control">
-                              <input id="notes" class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
-                            </div>
-                          </div>
-                        </form>
-              </section>
-              <footer class="modal-card-foot">
-                <button id="createDeckButton" class="button is-success">Create Deck</button>
-              </footer>
+    <!-- Create Deck Modal -->
+    <div class="modal" id=createDeckModal>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Create Deck</p>
+          <button class="delete" aria-label="close" id="createDeckClose"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <form id="createForm">
+            <div class="field">
+              <label class="label">Deck name</label>
+              <div class="control">
+                <input id="deck" class="input" type="text" placeholder="e.g Cobb Deck">
+              </div>
             </div>
-          </div>
-    
-            <!-- Login Modal -->
-    <div class="modal" id = loginModal>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Login</p>
-                <button class="delete" aria-label="close" id="loginClose"></button>
-              </header>
-              <section class="modal-card-body">
-                <!-- Content ... -->
-                <form id = "loginForm">
-                <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                          <input class="input" id="loginEmail" type="email" placeholder="e.g alexsmith@gmail.com">
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                          <input class="input" type="password" id="loginPassword" placeholder="Your password">
-                        </div>
-                      </div>
-                    </form>
-              </section>
-              <footer class="modal-card-foot">
-                <button class="button is-success" id="loginButton">Login</button>
-              </footer>
+
+            <div class="field">
+              <label class="label">Deck address</label>
+              <div class="control">
+                <input id="address" class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
+              </div>
             </div>
-          </div>
 
-            <!-- Sign up -->
-    <div class="modal" id = signupModal>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Sign up</p>
-                <button class="delete" aria-label="close" id="signupClose"></button>
-              </header>
-              <section class="modal-card-body">
-                <!-- Content ... -->
-                <form id = "signupForm">
-                <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                          <input class="input" type="email" id="signupEmail" placeholder="e.g alexsmith@gmail.com">
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                          <input class="input" type="password" id="signupPassword" placeholder="Your password">
-                        </div>
-                      </div>
-                    </form>
-              </section>
-              <footer class="modal-card-foot">
-                <button class="button is-success" id="signupButton">Sign up</button>
-              </footer>
+            <div class="field">
+              <label class="label">Notes</label>
+              <div class="control">
+                <input id="notes" class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
+              </div>
             </div>
-          </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button id="createDeckButton" class="button is-success">Create Deck</button>
+        </footer>
+      </div>
+    </div>
 
-    <section class="section" id="section1">
-        <div id="intro">
-            <h1 class="title">Find Parking at UNC</h1>
-            <form autocomplete="off" action="/action_page.php">
-                <div class="autocomplete" style="width:300px;">
-                    <input id="myInput" type="text" name="myAddress" placeholder="Address"
-                        style="padding: 7px; padding-right: 100px">
-                    <input type="submit" value="Search" style="padding: 10px">
-                </div>
+    <!-- Login Modal -->
+    <div class="modal" id=loginModal>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Login</p>
+          <button class="delete" aria-label="close" id="loginClose"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <form id="loginForm">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" id="loginEmail" type="email" placeholder="e.g alexsmith@gmail.com">
+              </div>
+            </div>
 
-            </form>
-        </div>
-        </div>
-    </section>
-    
-    <div class="decks" class = "logged-in">
-    </div>    
-    
-    <section class="section" id="root1">
-        <div id="root"></div>
-    </section>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" id="loginPassword" placeholder="Your password">
+              </div>
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="loginButton">Login</button>
+        </footer>
+      </div>
+    </div>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+    <!-- Sign up -->
+    <div class="modal" id=signupModal>
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Sign up</p>
+          <button class="delete" aria-label="close" id="signupClose"></button>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+          <form id="signupForm">
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="email" id="signupEmail" placeholder="e.g alexsmith@gmail.com">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" id="signupPassword" placeholder="Your password">
+              </div>
+            </div>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" id="signupButton">Sign up</button>
+        </footer>
+      </div>
+    </div>
+  </section>
+  <div class="decks" class="logged-in"></div>
 
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyCoOVgjVJLB-Si2R8ZExJM97uf_wRQ0W20",
-    authDomain: "sparc-a9e63.firebaseapp.com",
-    databaseURL: "https://sparc-a9e63.firebaseio.com",
-    projectId: "sparc-a9e63",
-    appId: "1:233989368975:web:d7bc030e1cf598ca6214fa",
-    measurementId: "G-TPV9EY5M2F"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-//   firebase.analytics();
-const auth = firebase.auth();
-const db = firebase.firestore();
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
 
-// update firestore settings
-// db.settings({timestampsInSnapshots: true})
-</script>
 
-    <script src="data.js"></script>
-    <script src="autocomplete.js" type="module"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="src/index.js" type="module"></script>
-    <script src="src/auth.js" type="module"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCoOVgjVJLB-Si2R8ZExJM97uf_wRQ0W20",
+      authDomain: "sparc-a9e63.firebaseapp.com",
+      databaseURL: "https://sparc-a9e63.firebaseio.com",
+      projectId: "sparc-a9e63",
+      appId: "1:233989368975:web:d7bc030e1cf598ca6214fa",
+      measurementId: "G-TPV9EY5M2F"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    //   firebase.analytics();
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // update firestore settings
+    // db.settings({timestampsInSnapshots: true})
+  </script>
+
+  <script src="data.js"></script>
+  <script src="autocomplete.js" type="module"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="src/index.js" type="module"></script>
+  <script src="src/auth.js" type="module"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </body>
-
-</html>

@@ -2,251 +2,275 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
 
-    <link href='styles.css' rel='stylesheet' />
-    <title> About Us </title>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+  <link href='styles.css' rel='stylesheet' />
+  <title> About Us </title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
-    <!-- Nav Bar -->
-    <header>
-          </nav>
-          <div class="navbar-menu">
-            <div class="navbar-start">
-              <!-- navbar items -->
-              <div class="navbar-item">
-                  <a href="index.html">SPARC</a>
-              </div>
-            </div>
-          
+  <section class="hero is-primary is-medium">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <h1 class="title">SPARC</h1>
+            </a>
+            <a class="navbar-item" href="index.html">
+              Home
+            </a>
+            <a class="navbar-item is-active" id="aboutUs" href="aboutUs.html">
+              About Us
+            </a>
+            <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
-              <!-- navbar items -->
-              <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-primary" id="home" href = "index.html">
-                        <strong>Home</strong>
-                    </a>
-                    <a class="button is-primary" id="aboutUs">
-                        <strong>About Us</strong>
-                      </a>
-                  <a class="button is-primary" id="myAccount">
-                    <strong>My Account</strong>
-                  </a>
-                  <a class="button is-primary" id="logout">
-                      <strong>Logout</strong>
-                    </a>
-                    <a class="button is-primary" id="createDeck">
-                      <strong>Create Deck</strong>
-                    </a>
-                    <a class="button is-primary" id="login">
-                      <strong>Login</strong>
-                    </a>
-                    <a class="button is-primary" id="signup">
-                      <strong>Sign up</strong>
-                    </a>
-              </div>
-            </div>
+
+              <a class="navbar-item" id="myAccount">
+                My Account
+              </a>
+              <a class="navbar-item" class="loggedIn" id="logout">
+                Logout
+              </a>
+              <a class="navbar-item" class="loggedIn" id="createDeck">
+                Create Deck
+              </a>
+              <a class="navbar-item" class="loggedOut" id="login">
+                Login
+              </a>
+              <a class="navbar-item" class="loggedOut" id="signup">
+                Sign Up
+              </a>
+
             </div>
           </div>
-    </header>
+        </div>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          About Us
+        </h1>
+      </div>
 
-    <!-- My Account Modal -->
-    <div class="modal" id = myAccountModal>
-        <div class="modal-background"></div>
-        <div class="modal-card">
-          <header class="modal-card-head">
-            <p class="modal-card-title">My Account</p>
-            <button class="delete" aria-label="close" id="myAccountClose"></button>
-          </header>
-          <section class="modal-card-body">
-            <!-- Content ... -->
-            <p>this is a modal</p>
-          </section>
-          <footer class="modal-card-foot">
-          </footer>
+      </form>
+    </div>
+  </section>
+
+  <!-- My Account Modal -->
+  <div class="modal" id=myAccountModal>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">My Account</p>
+        <button class="delete" aria-label="close" id="myAccountClose"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <p>this is a modal</p>
+      </section>
+      <footer class="modal-card-foot">
+      </footer>
+    </div>
+  </div>
+
+  <!-- Create Deck Modal -->
+  <div class="modal" id=createDeckModal>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Create Deck</p>
+        <button class="delete" aria-label="close" id="createDeckClose"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <div class="field">
+          <label class="label">Deck name</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="e.g Cobb Deck">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Deck address</label>
+          <div class="control">
+            <input class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Notes</label>
+          <div class="control">
+            <input class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Create Deck</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div class="modal" id=loginModal>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Login</p>
+        <button class="delete" aria-label="close" id="loginClose"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <form id="loginForm">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" id="loginEmail" type="email" placeholder="e.g alexsmith@gmail.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" id="loginPassword" placeholder="Your password">
+            </div>
+          </div>
+        </form>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" id="loginButton">Login</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Sign up -->
+  <div class="modal" id=signupModal>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Sign up</p>
+        <button class="delete" aria-label="close" id="signupClose"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <form id="signupForm">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input class="input" type="email" id="signupEmail" placeholder="e.g alexsmith@gmail.com">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" id="signupPassword" placeholder="Your password">
+            </div>
+          </div>
+        </form>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" id="signupButton">Sign up</button>
+      </footer>
+    </div>
+  </div>
+
+  <section id="sectionbios" class="section">
+    <div class="bio-container">
+      <div class="image">
+        <div class="image-auto" style="padding-bottom: 5%; padding-left: 20%;">
+          <img src="owenpic.png" style="width:250px;height:360px;">
         </div>
       </div>
-    
-      <!-- Create Deck Modal -->
-      <div class="modal" id = createDeckModal>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Create Deck</p>
-                <button class="delete" aria-label="close" id="createDeckClose"></button>
-              </header>
-              <section class="modal-card-body">
-                <!-- Content ... -->
-                <div class="field">
-                        <label class="label">Deck name</label>
-                        <div class="control">
-                          <input class="input" type="text" placeholder="e.g Cobb Deck">
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Deck address</label>
-                        <div class="control">
-                          <input class="input" type="email" placeholder="Paul Green Dr, Chapel Hill, NC 27514">
-                        </div>
-                      </div>
-
-                      <div class="field">
-                            <label class="label">Notes</label>
-                            <div class="control">
-                              <input class="input" type="email" placeholder="Park free after 5 on weeknights and weekends">
-                            </div>
-                          </div>
-              </section>
-              <footer class="modal-card-foot">
-                <button class="button is-success">Create Deck</button>
-              </footer>
-            </div>
-          </div>
-    
-            <!-- Login Modal -->
-    <div class="modal" id = loginModal>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Login</p>
-                <button class="delete" aria-label="close" id="loginClose"></button>
-              </header>
-              <section class="modal-card-body">
-                <!-- Content ... -->
-                <form id = "loginForm">
-                <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                          <input class="input" id="loginEmail" type="email" placeholder="e.g alexsmith@gmail.com">
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                          <input class="input" type="password" id="loginPassword" placeholder="Your password">
-                        </div>
-                      </div>
-                    </form>
-              </section>
-              <footer class="modal-card-foot">
-                <button class="button is-success" id="loginButton">Login</button>
-              </footer>
-            </div>
-          </div>
-
-            <!-- Sign up -->
-    <div class="modal" id = signupModal>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Sign up</p>
-                <button class="delete" aria-label="close" id="signupClose"></button>
-              </header>
-              <section class="modal-card-body">
-                <!-- Content ... -->
-                <form id = "signupForm">
-                <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                          <input class="input" type="email" id="signupEmail" placeholder="e.g alexsmith@gmail.com">
-                        </div>
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                          <input class="input" type="password" id="signupPassword" placeholder="Your password">
-                        </div>
-                      </div>
-                    </form>
-              </section>
-              <footer class="modal-card-foot">
-                <button class="button is-success" id="signupButton">Sign up</button>
-              </footer>
-            </div>
-          </div>
-
-    <section class="section" id="section1">
-        <div id="intro">
-            <h1 class="title">About Us</h1>
+      <div class="biocontent">
+        <h2 style="font-size: 20px; font-weight: bold;">Bryan Guin</h2>
+        <p style="padding-left: 5%; padding-right: 5%;">"Living 7 hours away in a location where only one other UNC
+          student is from, getting a ride back home for the holidays proved to be tough. Freshman year I was forced to
+          buy expensive train tickets, plane tickets, bus tickets, or ubers because I was not able to find parking here
+          on campus so I couldn’t bring my car. When I finally decided to just bring my car sophomore year I constantly
+          was berated with tickets and warnings about getting my car towed for parking in incorrect spots that had
+          improper or not up-to-date restrictions posted. To combat this, I helped create this site to help UNC students
+          find accessible, cheap and maybe even free parking on campus legally and safely.” </p>
+      </div>
+    </div>
+    <div class="bio-container">
+      <div class="image">
+        <div class="image-auto" style="padding-bottom: 5%; padding-left: 20%;">
+          <img src="owenpic.png" style="width:250px;height:360px;">
         </div>
-    </section>
-    <section id= "sectionbios" class = "section">
-        <div class = "bio-container1">
-            <div class = "image">
-                <div class = "image-auto" style = "padding-bottom: 5%; padding-left: 20%;">
-                    <img src = "owenpic.png" style="width:250px;height:360px;">
-                </div>
-            </div>
-            <div class = "biocontent">
-                <h2 style = "font-size: 20px; font-weight: bold;">Bryan Guin</h2>
-                <p style = "padding-left: 5%; padding-right: 5%;">"Living 7 hours away in a location where only one other UNC student is from, getting a ride back home for the holidays proved to be tough. Freshman year I was forced to buy expensive train tickets, plane tickets, bus tickets, or ubers because I was not able to find parking here on campus so I couldn’t bring my car. When I finally decided to just bring my car sophomore year I constantly was berated with tickets and warnings about getting my car towed for parking in incorrect spots that had improper or not up-to-date restrictions posted. To combat this, I helped create this site to help UNC students find accessible, cheap and maybe even free parking on campus legally and safely.”  </p>
-            </div>
+      </div>
+      <div class="biocontent">
+        <h2 style="font-size: 20px; font-weight: bold;">Kinsey Ness</h2>
+        <p style="padding-left: 5%; padding-right: 5%;">"Living 7 hours away in a location where only one other UNC
+          student is from, getting a ride back home for the holidays proved to be tough. Freshman year I was forced to
+          buy expensive train tickets, plane tickets, bus tickets, or ubers because I was not able to find parking here
+          on campus so I couldn’t bring my car. When I finally decided to just bring my car sophomore year I constantly
+          was berated with tickets and warnings about getting my car towed for parking in incorrect spots that had
+          improper or not up-to-date restrictions posted. To combat this, I helped create this site to help UNC students
+          find accessible, cheap and maybe even free parking on campus legally and safely.” </p>
+      </div>
+    </div>
+    <div class="bio-container">
+      <div class="image">
+        <div class="image-auto" style="padding-bottom: 5%; padding-left: 20%;">
+          <img src="owenpic.png" style="width:250px;height:360px;">
         </div>
-        <div class = "bio-container2">
-            <div class = "image">
-                <div class = "image-auto" style = "padding-bottom: 5%; padding-left: 20%;">
-                    <img src = "owenpic.png" style="width:250px;height:360px;">
-                </div>
-            </div>
-            <div class = "biocontent">
-                <h2 style = "font-size: 20px; font-weight: bold;">Kinsey Ness</h2>
-                <p style = "padding-left: 5%; padding-right: 5%;">"Living 7 hours away in a location where only one other UNC student is from, getting a ride back home for the holidays proved to be tough. Freshman year I was forced to buy expensive train tickets, plane tickets, bus tickets, or ubers because I was not able to find parking here on campus so I couldn’t bring my car. When I finally decided to just bring my car sophomore year I constantly was berated with tickets and warnings about getting my car towed for parking in incorrect spots that had improper or not up-to-date restrictions posted. To combat this, I helped create this site to help UNC students find accessible, cheap and maybe even free parking on campus legally and safely.”  </p>
-            </div>
-        </div>
-        <div class = "bio-container3">
-                <div class = "image">
-                    <div class = "image-auto" style = "padding-bottom: 5%; padding-left: 20%;">
-                        <img src = "owenpic.png" style="width:250px;height:360px;">
-                    </div>
-                </div>
-                <div class = "biocontent">
-                    <h2 style = "font-size: 20px; font-weight: bold;">Owen Riley</h2>
-                    <p style = "padding-left: 5%; padding-right: 5%;">"Living 7 hours away in a location where only one other UNC student is from, getting a ride back home for the holidays proved to be tough. Freshman year I was forced to buy expensive train tickets, plane tickets, bus tickets, or ubers because I was not able to find parking here on campus so I couldn’t bring my car. When I finally decided to just bring my car sophomore year I constantly was berated with tickets and warnings about getting my car towed for parking in incorrect spots that had improper or not up-to-date restrictions posted. To combat this, I helped create this site to help UNC students find accessible, cheap and maybe even free parking on campus legally and safely.”  </p>
-                </div>
-            </div>
-    </section> 
+      </div>
+      <div class="biocontent">
+        <h2 style="font-size: 20px; font-weight: bold;">Owen Riley</h2>
+        <p style="padding-left: 5%; padding-right: 5%;">"Living 7 hours away in a location where only one other UNC
+          student is from, getting a ride back home for the holidays proved to be tough. Freshman year I was forced to
+          buy expensive train tickets, plane tickets, bus tickets, or ubers because I was not able to find parking here
+          on campus so I couldn’t bring my car. When I finally decided to just bring my car sophomore year I constantly
+          was berated with tickets and warnings about getting my car towed for parking in incorrect spots that had
+          improper or not up-to-date restrictions posted. To combat this, I helped create this site to help UNC students
+          find accessible, cheap and maybe even free parking on campus legally and safely.” </p>
+      </div>
+    </div>
+  </section>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
 
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyCoOVgjVJLB-Si2R8ZExJM97uf_wRQ0W20",
-    authDomain: "sparc-a9e63.firebaseapp.com",
-    databaseURL: "https://sparc-a9e63.firebaseio.com",
-    projectId: "sparc-a9e63",
-    appId: "1:233989368975:web:d7bc030e1cf598ca6214fa",
-    measurementId: "G-TPV9EY5M2F"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-//   firebase.analytics();
-const auth = firebase.auth();
-const db = firebase.firestore();
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCoOVgjVJLB-Si2R8ZExJM97uf_wRQ0W20",
+      authDomain: "sparc-a9e63.firebaseapp.com",
+      databaseURL: "https://sparc-a9e63.firebaseio.com",
+      projectId: "sparc-a9e63",
+      appId: "1:233989368975:web:d7bc030e1cf598ca6214fa",
+      measurementId: "G-TPV9EY5M2F"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    //   firebase.analytics();
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-// update firestore settings
-// db.settings({timestampsInSnapshots: true})
-</script>
-
-    <script src="data.js"></script>
-    <script src="autocomplete.js" type="module"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="src/index.js" type="module"></script>
-    <script src="src/auth.js" type="module"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    // update firestore settings
+    // db.settings({timestampsInSnapshots: true})
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="src/index.js" type="module"></script>
+  <script src="src/auth.js" type="module"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

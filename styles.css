@@ -1,8 +1,8 @@
 body {
     margin: 0 auto;
     width: 100%;
-    background-color: #26323A;
-    /* color: white; */
+    background-color: #F5F5F5;
+    color: #494949;
 }
 #root1 {
     padding-top:0;
@@ -18,23 +18,11 @@ html {
     text-align: center;
 }
 
-header {
-    background-color: #082234;
-    padding-top: 1em;
-    display: flex;
-    justify-content: space-between;
-    position:fixed;  
-    z-index:1; /*Add this*/
-    width:100%;
-    text-align:center;
-    vertical-align:middle;
-    line-height:50px;
-    top:0px;
-}
 
-.title {
+
+/* .title {
     color: white;
-}
+} */
 
 a {
     text-decoration: none;
@@ -58,32 +46,16 @@ div.deckname:hover {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.bio-container1 {
+.bio-container {
     width: 33.33%;
     float: left;
-    background-color: #26323A;
-    color: white;
-}
-
-.bio-container2 {
-    width: 33.33%;
-    float: left;
-    background-color: #26323A;
-}
-
-.bio-container3 {
-    width: 33.34%;
-    float: left;
-    background-color: #26323A;
+    background-color: #F5F5F5;
+    color: #494949;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 #sectionbios {
     display: block;
     padding: 0px 0px 0px 0px;
-    background-color: #26323A;
-    color: white;
-}
-
-.biocontent {
-    color: white;
 }
