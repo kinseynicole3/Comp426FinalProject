@@ -50,7 +50,7 @@ signupClose.onclick = function() {
 }
 
 // $(function() {
-//     loadParking();
+//     loadMap();
 // });
 
 
@@ -76,7 +76,7 @@ signupClose.onclick = function() {
 //         return element.id == event.target.id;
 //     });
 
-//     $root.append(renderMap(deck.xCoordinate, deck.yCoordinate));
+//     $root.append(renderMap(35.911919, -79.04556));
 // }
 
 // export const renderMap = function(x, y) {

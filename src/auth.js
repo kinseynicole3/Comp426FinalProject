@@ -1,14 +1,18 @@
+export const $root = $('#root');
+export const $hero = $('#hero-body');
+export const $nav = $('#nav');
+
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
     if (user) {
         db.collection('decks').get().then(snapshot => {
             setupDecks(snapshot.docs);
             // setupUI(user);
-            });
-        } else {
-            // setupUI();
-            setupDecks([]);
-        }
+        });
+    } else {
+        // setupUI();
+        setupDecks([]);
+    }
 });
 
 // create new deck
@@ -39,46 +43,112 @@ const setupDecks = (data) => {
     data.forEach(doc => {
         const theDeck = doc.data();
         const div = `
-        <div id="${theDeck.deck}></div>
         <section class="section" style="border-bottom-style: solid; border-width: 0.5px; padding-top: 20px;">
         <div class="container is-light">
             <div class="content has-text-left">
-                <h1 class="title deckname" id="">${theDeck.deck}</h1>
-                <h2 class="subtitle">${theDeck.address}</h2>
+                <div class="title deckname" id="${theDeck.deck}">${theDeck.deck}</div>
+                <p class="subtitle">${theDeck.address}</h2>
                 <p class="subtitle">Notes: ${theDeck.notes}</p>
             </div>
         </div>
           <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
-              <button class="button is-light">Save</button>
-              <button class="button is-light">Edit</button>
-              <button class="button is-light">Delete</button>
+              <button class="button is-success">Save</button>
+              <button class="button">Edit</button>
+              <button class="button is-danger">Delete</button>
             </div>
-        </div>
+       
         </section>
         `;
         html += div;
     });
 
     deckList.innerHTML = html;
-}
-export const loadMap = function() {
-    let deck = parkingDecks.find(function(element) {
-        return element.id == event.target.id;
+
+    data.forEach(doc => {
+        const theDeck = doc.data();
+        const deckName = document.getElementById(theDeck.deck);
+        deckName.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadMap(theDeck);
+        });
     });
 
-    $root.append(renderMap(deck.xCoordinate, deck.yCoordinate));
+
 }
 
-export const renderMap = function(x, y) {
+export const loadNoHero = function () {
     return `
-    <div id='map' style='width: 400px; height: 300px;'></div>
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <h1 class="title">SPARC</h1>
+            </a>
+            <a class="navbar-item" href="index.html">
+                Home
+              </a>
+              <a class="navbar-item" id="aboutUs" href="aboutUs.html">
+                  About Us
+                </a>
+            <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
+            <div class="navbar-end">
+              
+              <a class="navbar-item" id="myAccount">
+                My Account
+              </a>
+              <a class="navbar-item" class="loggedIn" id="logout">
+                Logout
+              </a>
+              <a class="navbar-item" class="loggedIn" id="createDeck">
+                Create Deck
+              </a>
+              <a class="navbar-item" class="loggedOut" id="login">
+                Login
+              </a>
+              <a class="navbar-item" class="loggedOut" id="signup">
+                Sign Up
+              </a>
+      
+            </div>
+          </div>
+        </div>
+      </nav>
+      `
+}
+
+export const loadMap = function (theDeck) {
+    $root.empty();
+    $nav.empty();
+    $nav.append(loadNoHero());
+    $root.append(renderMap(theDeck));
+}
+
+export const renderMap = function (theDeck) {
+    return `
+    <section class="section" style="padding-top: 20px;">
+        <div class="container is-light">
+            <div class="content has-text-left">
+                <div class="title" id="${theDeck.deck}" style="color: #494949">${theDeck.deck}</div>
+                <p class="subtitle" style="color: #494949">${theDeck.address}</h2>
+                <p class="subtitle" style="color: #494949">Notes: ${theDeck.notes}</p>
+            </div>
+        </div>
+        </section>
+    <div class="content has-text-center">
+    <div id='map' style='width: 100%; height: 400px;'></div>
     <script>
         mapboxgl.accessToken =
             'pk.eyJ1IjoiY29tcDQyNmZpbmFsIiwiYSI6ImNrMzZidGNsZDAwMzEzbXJ4bXFnM3loYjgifQ.gyiwVu9eUjqg-If1v-gK0A';
             var map = new mapboxgl.Map({
                 container: 'map', 
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: [${y}, ${x}],
+                center: [${theDeck.y}, ${theDeck.x}],
                 zoom: 16 
                 });
                 map.addControl(new mapboxgl.NavigationControl());
@@ -97,7 +167,7 @@ export const renderMap = function(x, y) {
                             "type": "Feature",
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [${y},${x}]
+                                "coordinates": [${theDeck.y},${theDeck.x}]
                             }
                         }]
                         }
@@ -110,23 +180,11 @@ export const renderMap = function(x, y) {
             });
         });
     </script>
+    </div>
     `
 }
 
-export const loadParking = function() {
-    
-    parkingDecks.forEach(deck => {
-        $root.append(renderListItem(deck));
-    });
-    
-    $(document).on("click", ".deckname", function(event) {
-        event.preventDefault();
-        $section.empty();
-        $root.empty();
-        loadMap(event);
-    });
 
-}
 
 // render UI
 
@@ -134,18 +192,18 @@ const loggedOutLinks = document.querySelector('.loggedOut');
 const loggedInLinks = document.querySelector('.loggedIn');
 
 const setupUI = (user) => {
-if (user) {
-    // toggle UI elements
-    loggedInLinks.forEach(item => item.style.display = 'block');
-    loggedOutLinks.forEach(item => item.style.display = 'none');
-    console.log(loggedInLinks)
-    console.log(loggedOutLinks)
-} else {
-    loggedInLinks.forEach(item => item.style.display = 'none');
-    loggedOutLinks.forEach(item => item.style.display = 'block');
-    console.log(loggedInLinks)
-    console.log(loggedOutLinks)
-}
+    if (user) {
+        // toggle UI elements
+        loggedInLinks.forEach(item => item.style.display = 'block');
+        loggedOutLinks.forEach(item => item.style.display = 'none');
+        console.log(loggedInLinks)
+        console.log(loggedOutLinks)
+    } else {
+        loggedInLinks.forEach(item => item.style.display = 'none');
+        loggedOutLinks.forEach(item => item.style.display = 'block');
+        console.log(loggedInLinks)
+        console.log(loggedOutLinks)
+    }
 }
 
 // sign up
@@ -194,20 +252,3 @@ loginButton.addEventListener('click', (e) => {
         loginForm.reset();
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

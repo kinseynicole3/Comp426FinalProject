@@ -31,12 +31,13 @@ a {
 }
 
 a:hover {
-    color: #437272;
+    color: #51B59D;
 }
 
 div.deckname:hover {
-    color: #437272;
+    color: #51B59D;
 }
+
 
 #intro {
     font-size: 1.5em;
