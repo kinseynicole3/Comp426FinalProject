@@ -122,14 +122,36 @@ export const loadNoHero = function () {
       `
 }
 
-export const loadMap = function (theDeck) {
+async function loadMap (theDeck) {
     $root.empty();
     $nav.empty();
-    $nav.append(loadNoHero());
-    $root.append(renderMap(theDeck));
+    let str = theDeck.address.split(",");
+    let addy = str[0] + " NC";
+    getCoordinates(addy, theDeck);
+    
 }
 
-export const renderMap = function (theDeck) {
+
+
+async function getCoordinates (address, theDeck) {
+    L.mapbox.accessToken = 'pk.eyJ1IjoiY29tcDQyNmZpbmFsIiwiYSI6ImNrMzZidGNsZDAwMzEzbXJ4bXFnM3loYjgifQ.gyiwVu9eUjqg-If1v-gK0A';
+    var geocoder = L.mapbox.geocoder('mapbox.places');
+
+    geocoder.query(address, showMap);
+
+    function showMap(err, data) {
+        if (data.latlng) {
+            console.log(data.latlng[0] + ', ' + data.latlng[1]);
+            $nav.append(loadNoHero());
+            $root.append(renderMap(theDeck, data.latlng[0], data.latlng[1]));
+        }
+    }
+}
+
+
+
+
+export const renderMap = function (theDeck, x, y) {
     return `
     <section class="section" style="padding-top: 20px;">
         <div class="container is-light">
@@ -148,9 +170,12 @@ export const renderMap = function (theDeck) {
             var map = new mapboxgl.Map({
                 container: 'map', 
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: [${theDeck.y}, ${theDeck.x}],
+                center: [${y}, ${x}],
                 zoom: 16 
                 });
+                map.addControl(new MapboxDirections({
+                    accessToken: mapboxgl.accessToken
+                    }), 'top-left');
                 map.addControl(new mapboxgl.NavigationControl());
                 map.on('load', function() {
                     map.loadImage('./location1.png', function(error, image) {
@@ -167,7 +192,7 @@ export const renderMap = function (theDeck) {
                             "type": "Feature",
                             "geometry": {
                                 "type": "Point",
-                                "coordinates": [${theDeck.y},${theDeck.x}]
+                                "coordinates": [${y},${x}]
                             }
                         }]
                         }
