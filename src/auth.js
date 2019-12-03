@@ -125,10 +125,7 @@ export const loadNoHero = function () {
 async function loadMap (theDeck) {
     $root.empty();
     $nav.empty();
-    let str = theDeck.address.split(",");
-    let addy = str[0] + " NC";
-    getCoordinates(addy, theDeck);
-    
+    getCoordinates(theDeck.address, theDeck);    
 }
 
 
@@ -141,7 +138,6 @@ async function getCoordinates (address, theDeck) {
 
     function showMap(err, data) {
         if (data.latlng) {
-            console.log(data.latlng[0] + ', ' + data.latlng[1]);
             $nav.append(loadNoHero());
             $root.append(renderMap(theDeck, data.latlng[0], data.latlng[1]));
         }
