@@ -43,7 +43,7 @@ const setupDecks = (data) => {
     data.forEach(doc => {
         const theDeck = doc.data();
         const div = `  
-        <div class="tile is-parent" style="min-width: 33%">
+        <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
             <article class="tile is-child notification is-light">
                 <div class="content has-text-left">
                     <div class="title deckname" id="${theDeck.deck}">${theDeck.deck}</div>
@@ -51,14 +51,11 @@ const setupDecks = (data) => {
                     <p class="subtitle">Notes: ${theDeck.notes}</p>
                 </div>
                 <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
-              <button class="button is-success">Save</button>
-              <button class="button">Edit</button>
-              <button class="button is-danger">Delete</button>
-            </div>
+                    <button class="button is-success">Save</button>
+                    <button class="button">Edit</button>
+                    <button class="button is-danger">Delete</button>
+                </div>
             </article>
-        
-          
-       
         </div>
         `;
         html += div;
@@ -80,47 +77,47 @@ const setupDecks = (data) => {
 
 export const loadNoHero = function () {
     return `
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-brand">
-            <a class="navbar-item">
-              <h1 class="title">SPARC</h1>
-            </a>
-            <a class="navbar-item" href="index.html">
-                Home
-              </a>
-              <a class="navbar-item" id="aboutUs" href="aboutUs.html">
-                  About Us
-                </a>
-            <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </div>
-          <div id="navbarMenuHeroA" class="navbar-menu">
-            <div class="navbar-end">
-              
-              <a class="navbar-item" id="myAccount">
-                My Account
-              </a>
-              <a class="navbar-item" class="loggedIn" id="logout">
-                Logout
-              </a>
-              <a class="navbar-item" class="loggedIn" id="createDeck">
-                Create Deck
-              </a>
-              <a class="navbar-item" class="loggedOut" id="login">
-                Login
-              </a>
-              <a class="navbar-item" class="loggedOut" id="signup">
-                Sign Up
-              </a>
-      
-            </div>
-          </div>
+    <nav class="navbar is-fixed-top" style="background-color: hsl(171, 90%, 35%); border-bottom-style: solid; border-color: white; border-bottom-width: 1.5px;">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <h2 class="subtitle is-2">SPARC</h2>
+        </a>
+        <a class="navbar-item is-active" href="index.html">
+          Home
+        </a>
+        <a class="navbar-item" id="aboutUs" href="aboutUs.html">
+          About Us
+        </a>
+        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div id="navbarMenuHeroA" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" id="myAccount">
+            My Account
+          </a>
+          <a class="navbar-item" class="loggedIn" id="logout">
+            Logout
+          </a>
+          <a class="navbar-item" class="loggedIn" id="createDeck">
+            Create Deck
+          </a>
+          <a class="navbar-item" class="loggedOut" id="login">
+            Login
+          </a>
+          <a class="navbar-item" class="loggedOut" id="signup">
+            Sign Up
+          </a>
+
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
+
       `
 }
 
@@ -147,11 +144,9 @@ async function getCoordinates (address, theDeck) {
 }
 
 
-
-
 export const renderMap = function (theDeck, x, y) {
     return `
-    <section class="section" style="padding-top: 20px;">
+    <section class="section" style="padding-top: 40px; background-color: hsl(0, 0%, 96%)">
         <div class="container is-light">
             <div class="content has-text-left">
                 <div class="title" id="${theDeck.deck}" style="color: #494949">${theDeck.deck}</div>

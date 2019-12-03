@@ -4,6 +4,7 @@ body {
     background-color: white;
     color: #494949;
 }
+
 .decks {
     display: flex;
     flex-wrap: wrap;
