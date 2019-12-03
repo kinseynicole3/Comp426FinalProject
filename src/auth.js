@@ -1,5 +1,5 @@
 export const $root = $('#root');
-export const $hero = $('#hero-body');
+export const $maps = $('#maps');
 export const $nav = $('#nav');
 
 // listen for auth status changes
@@ -42,22 +42,24 @@ const setupDecks = (data) => {
     let html = '';
     data.forEach(doc => {
         const theDeck = doc.data();
-        const div = `
-        <section class="section" style="border-bottom-style: solid; border-width: 0.5px; padding-top: 20px;">
-        <div class="container is-light">
-            <div class="content has-text-left">
-                <div class="title deckname" id="${theDeck.deck}">${theDeck.deck}</div>
-                <p class="subtitle">${theDeck.address}</h2>
-                <p class="subtitle">Notes: ${theDeck.notes}</p>
-            </div>
-        </div>
-          <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
+        const div = `  
+        <div class="tile is-parent" style="min-width: 33%">
+            <article class="tile is-child notification is-light">
+                <div class="content has-text-left">
+                    <div class="title deckname" id="${theDeck.deck}">${theDeck.deck}</div>
+                    <p class="subtitle">${theDeck.address}</h2>
+                    <p class="subtitle">Notes: ${theDeck.notes}</p>
+                </div>
+                <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
               <button class="button is-success">Save</button>
               <button class="button">Edit</button>
               <button class="button is-danger">Delete</button>
             </div>
+            </article>
+        
+          
        
-        </section>
+        </div>
         `;
         html += div;
     });
@@ -139,7 +141,7 @@ async function getCoordinates (address, theDeck) {
     function showMap(err, data) {
         if (data.latlng) {
             $nav.append(loadNoHero());
-            $root.append(renderMap(theDeck, data.latlng[0], data.latlng[1]));
+            $maps.append(renderMap(theDeck, data.latlng[0], data.latlng[1]));
         }
     }
 }

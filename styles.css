@@ -1,8 +1,12 @@
 body {
     margin: 0 auto;
     width: 100%;
-    background-color: #F5F5F5;
+    background-color: white;
     color: #494949;
+}
+.decks {
+    display: flex;
+    flex-wrap: wrap;
 }
 #root1 {
     padding-top:0;
