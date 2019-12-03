@@ -269,3 +269,27 @@ loginButton.addEventListener('click', (e) => {
         loginForm.reset();
     })
 })
+
+//event listener on the submit button, call loadMap with that 
+document.getElementById("autofillbutton").addEventListener('click', (e) => {
+    e.preventDefault();
+    var input = document.getElementById("myInput").value;
+    var deck;
+    db.collection('decks').get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          var deckObjects = doc.data();
+          var address = deckObjects.address;
+          var spotname = deckObjects.deck;
+          
+            if(input == address) {
+                deck = deckObjects;
+                loadMap(deck);
+            } 
+            if(input == spotname) {
+                deck = deckObjects;
+                loadMap(deck);
+            }
+        });
+        
+      });
+});
