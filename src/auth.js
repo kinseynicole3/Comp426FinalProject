@@ -46,14 +46,12 @@ const setupDecks = (data) => {
         <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
             <article class="tile is-child notification is-light">
                 <div class="content has-text-left">
-                    <div class="title deckname" id="${theDeck.deck}">${theDeck.deck}</div>
+                    <button class="button deckname" id="${theDeck.deck}">${theDeck.deck}</button>
                     <p class="subtitle">${theDeck.address}</h2>
                     <p class="subtitle">Notes: ${theDeck.notes}</p>
                 </div>
                 <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
-                    <button class="button is-success">Save</button>
-                    <button class="button">Edit</button>
-                    <button class="button is-danger">Delete</button>
+                    <button class="button is-primary">Edit</button>
                 </div>
             </article>
         </div>
@@ -83,7 +81,7 @@ export const loadNoHero = function () {
         <a class="navbar-item">
           <h2 class="subtitle is-2">SPARC</h2>
         </a>
-        <a class="navbar-item is-active" href="index.html">
+        <a class="navbar-item" href="index.html">
           Home
         </a>
         <a class="navbar-item" id="aboutUs" href="aboutUs.html">
@@ -199,6 +197,7 @@ export const renderMap = function (theDeck, x, y) {
         });
     </script>
     </div>
+    
     `
 }
 

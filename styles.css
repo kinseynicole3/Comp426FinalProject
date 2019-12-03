@@ -39,7 +39,15 @@ a:hover {
     color: #51B59D;
 }
 
-div.deckname:hover {
+.deckname {
+    border-style: none; 
+    background-color: hsl(0, 0%, 96%); 
+    padding-left: 0;
+    font-size: 1.7em; 
+    font-weight: bold;
+}
+
+.deckname:hover {
     color: #51B59D;
 }
 
