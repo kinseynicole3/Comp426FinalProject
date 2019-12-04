@@ -72,8 +72,7 @@ const setupDecks = (data) => {
         });
     });
     } else {
-        deckList.innerHTML = '<h5>Login to view decks<h5>';
-        console.log("here");
+        deckList.innerHTML = '<div>Login to view decks<div>';
     }
 
 }
@@ -220,11 +219,13 @@ const accountBody = document.querySelector('#accountBody')
 const setupUI = (user) => {
     if (user) {
         // account info
-        const html = `
-        <div>Email: ${user.email}</div>
-        `;
-        accountBody.innerHTML = html;
-        console.log("here");
+        db.collection('users').doc(user.uid).get().then(doc => {
+            const html = `
+            <div> Email: ${user.email}</div>
+            <div> Name: ${doc.data().name}
+            `;
+            accountBody.innerHTML = html;
+        })
 
         // toggle UI elements
         myAccount.style.display = 'block';
@@ -259,11 +260,16 @@ signupButton.addEventListener('click', (e) => {
 
     // sign up the user
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
+        // console.log(signupForm['name'].value);
+        return db.collection('users').doc(cred.user.uid).set({
+            name: signupForm['name'].value
+        });
+    }).then(() => {
         const modal = document.querySelector('#signupModal');
         modal.style.display = 'none';
         signupForm.reset();
-    })
-})
+    });
+});
 
 // logout
 const logout = document.querySelector('#logout');
