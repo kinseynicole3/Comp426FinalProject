@@ -228,9 +228,9 @@ const setupUI = (user) => {
         })
 
         // toggle UI elements
-        myAccount.style.display = 'block';
-        logout.style.display = 'block';
-        createDeck.style.display = 'block';
+        myAccount.style.display = 'flex';
+        logout.style.display = 'flex';
+        createDeck.style.display = 'flex';
         login.style.display = 'none';
         signup.style.display = 'none';
 
@@ -242,8 +242,8 @@ const setupUI = (user) => {
         myAccount.style.display = 'none';
         logout.style.display = 'none';
         createDeck.style.display = 'none';
-        login.style.display = 'block';
-        signup.style.display = 'block';
+        login.style.display = 'flex';
+        signup.style.display = 'flex';
     }
 }
 
