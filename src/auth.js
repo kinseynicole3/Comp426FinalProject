@@ -4,13 +4,14 @@ export const $nav = $('#nav');
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
+    
     if (user) {
-        db.collection('decks').get().then(snapshot => {
+        db.collection('decks').onSnapshot(snapshot => {
             setupDecks(snapshot.docs);
-            // setupUI(user);
+            setupUI(user);
         });
     } else {
-        // setupUI();
+        setupUI();
         setupDecks([]);
     }
 });
@@ -39,6 +40,7 @@ const deckList = document.querySelector('.decks');
 
 const setupDecks = (data) => {
 
+    if (data.length) {
     let html = '';
     data.forEach(doc => {
         const theDeck = doc.data();
@@ -69,7 +71,10 @@ const setupDecks = (data) => {
             loadMap(theDeck);
         });
     });
-
+    } else {
+        deckList.innerHTML = '<h5>Login to view decks<h5>';
+        console.log("here");
+    }
 
 }
 
@@ -205,21 +210,39 @@ export const renderMap = function (theDeck, x, y) {
 
 // render UI
 
-const loggedOutLinks = document.querySelector('.loggedOut');
-const loggedInLinks = document.querySelector('.loggedIn');
+const myAccount = document.querySelector('#myAccount');
+// const logout = document.querySelector('#logout');
+const createDeck = document.querySelector('#createDeck');
+const login = document.querySelector('#login');
+const signup = document.querySelector('#signup');
+const accountBody = document.querySelector('#accountBody')
 
 const setupUI = (user) => {
     if (user) {
+        // account info
+        const html = `
+        <div>Email: ${user.email}</div>
+        `;
+        accountBody.innerHTML = html;
+        console.log("here");
+
         // toggle UI elements
-        loggedInLinks.forEach(item => item.style.display = 'block');
-        loggedOutLinks.forEach(item => item.style.display = 'none');
-        console.log(loggedInLinks)
-        console.log(loggedOutLinks)
+        myAccount.style.display = 'block';
+        logout.style.display = 'block';
+        createDeck.style.display = 'block';
+        login.style.display = 'none';
+        signup.style.display = 'none';
+
     } else {
-        loggedInLinks.forEach(item => item.style.display = 'none');
-        loggedOutLinks.forEach(item => item.style.display = 'block');
-        console.log(loggedInLinks)
-        console.log(loggedOutLinks)
+        // hide account info
+        accountBody.innerHTML='';
+
+        // toggle UI elements
+        myAccount.style.display = 'none';
+        logout.style.display = 'none';
+        createDeck.style.display = 'none';
+        login.style.display = 'block';
+        signup.style.display = 'block';
     }
 }
 
