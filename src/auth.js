@@ -11,8 +11,10 @@ auth.onAuthStateChanged(user => {
             setupUI(user);
         });
     } else {
-        setupUI();
-        setupDecks([]);
+        db.collection('decks').onSnapshot(snapshot => {
+            setupDecks(snapshot.docs);
+            setupUI();
+        });
     }
 });
 
@@ -40,7 +42,7 @@ const deckList = document.querySelector('.decks');
 
 const setupDecks = (data) => {
 
-    if (data.length) {
+
     let html = '';
     data.forEach(doc => {
         const theDeck = doc.data();
@@ -71,9 +73,6 @@ const setupDecks = (data) => {
             loadMap(theDeck);
         });
     });
-    } else {
-        deckList.innerHTML = '<div>Login to view decks<div>';
-    }
 
 }
 
