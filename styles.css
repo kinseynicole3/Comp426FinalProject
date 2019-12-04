@@ -73,3 +73,13 @@ a:hover {
     display: block;
     padding: 0px 0px 0px 0px;
 }
+
+#sparcinfo {
+    color: #494949;
+    background-color: #F5F5F5;
+}
+
+.section {
+    color: #494949;
+    background-color: #F5F5F5;
+}
