@@ -7,12 +7,12 @@ auth.onAuthStateChanged(user => {
     
     if (user) {
         db.collection('decks').onSnapshot(snapshot => {
-            setupDecks(snapshot.docs);
+            setupDecksWithEdit(snapshot.docs);
             setupUI(user);
         });
     } else {
         db.collection('decks').onSnapshot(snapshot => {
-            setupDecks(snapshot.docs);
+            setupDecksWithoutEdit(snapshot.docs);
             setupUI();
         });
     }
@@ -40,7 +40,45 @@ createDeckButton.addEventListener('click', (e) => {
 // render decks
 const deckList = document.querySelector('.decks');
 
-const setupDecks = (data) => {
+const setupDecksWithoutEdit = (data) => {
+
+
+    let html = '';
+    data.forEach(doc => {
+        const theDeck = doc.data();
+        const div = `  
+        <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
+            <article class="tile is-child notification is-light">
+                <div class="content has-text-left">
+                    <button class="button deckname" id="${theDeck.deck}">${theDeck.deck}</button>
+                    <p class="subtitle">${theDeck.address}</h2>
+                    <p class="subtitle">Notes: ${theDeck.notes}</p>
+                </div>
+                <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
+                    
+                </div>
+            </article>
+        </div>
+        `;
+        html += div;
+    });
+
+    deckList.innerHTML = html;
+
+    data.forEach(doc => {
+        const theDeck = doc.data();
+        const deckName = document.getElementById(theDeck.deck);
+        deckName.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadMap(theDeck);
+        });
+    });
+
+}
+
+// const deckList = document.querySelector('.decks');
+
+const setupDecksWithEdit = (data) => {
 
 
     let html = '';
@@ -221,7 +259,7 @@ const setupUI = (user) => {
         db.collection('users').doc(user.uid).get().then(doc => {
             const html = `
             <div> Email: ${user.email}</div>
-            <div> Name: ${doc.data().name}
+            <div> Name: ${doc.data().name}</div>
             `;
             accountBody.innerHTML = html;
         })
