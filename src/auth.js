@@ -4,7 +4,7 @@ export const $nav = $('#nav');
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
-    
+
     if (user) {
         db.collection('decks').onSnapshot(snapshot => {
             setupDecksWithEdit(snapshot.docs);
@@ -80,7 +80,6 @@ const setupDecksWithoutEdit = (data) => {
 
 const setupDecksWithEdit = (data) => {
 
-
     let html = '';
     data.forEach(doc => {
         const theDeck = doc.data();
@@ -93,7 +92,7 @@ const setupDecksWithEdit = (data) => {
                     <p class="subtitle">Notes: ${theDeck.notes}</p>
                 </div>
                 <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
-                    <button class="button is-primary">Edit</button>
+                    <button id="${doc.id}"class="button is-primary edit">Edit</button>
                 </div>
             </article>
         </div>
@@ -105,6 +104,15 @@ const setupDecksWithEdit = (data) => {
 
     data.forEach(doc => {
         const theDeck = doc.data();
+        const editID = document.getElementById(doc.id);
+        editID.addEventListener('click', (e) => {
+            e.preventDefault();
+            loadDeckEditForm(data, doc.id);
+        });
+    });
+
+    data.forEach(doc => {
+        const theDeck = doc.data();
         const deckName = document.getElementById(theDeck.deck);
         deckName.addEventListener('click', (e) => {
             e.preventDefault();
@@ -112,6 +120,80 @@ const setupDecksWithEdit = (data) => {
         });
     });
 
+}
+
+export const loadDeckEditForm = function (data, id) {
+    $root.empty();
+    $nav.empty();
+    $nav.append(loadNoHero());
+    let deckToEdit;
+    data.forEach(doc => {
+        if (doc.id == id) {
+            deckToEdit = doc.data();
+        }
+    });
+    $root.append(getEditForm(deckToEdit));
+    // var database = firebase.database();
+    let path = "-decks/" + id;
+
+    $(document).on("click", ".save", function (event) {
+        let newName = document.getElementById("newDeckName").value;
+        let newAddress = document.getElementById("newDeckAddress").value;
+        let newNotes = document.getElementById("newDeckNotes").value;
+        event.preventDefault();
+
+        db.collection("decks").doc(id).update({
+            deck: newName,
+            address: newAddress,
+            notes: newNotes
+        });
+
+    });
+
+    $(document).one("click", "#deleteDeck", function (event) {
+        event.preventDefault();
+
+        db.collection("decks").doc(id).delete().then(function() {
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+        
+    });
+}
+
+export const getEditForm = function (theDeck) {
+    return `
+    <section class="section" style="width: 100%">
+    <div class="content has-text-left">
+        <h1 class="subtitle">Edit Deck</h1>
+        <form>
+            <div class="field">
+                <label class="label" >Name</label>
+                <div class="control">
+                    <textarea class="textarea" id="newDeckName">${theDeck.deck}</textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Address</label>
+                <div class="control">
+                    <textarea class="textarea" id="newDeckAddress">${theDeck.address}</textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Notes</label>
+                <div class="control">
+                    <textarea class="textarea" id="newDeckNotes">${theDeck.notes}</textarea>
+                </div>
+            </div>
+            <div class="content has-text-right">
+                <button class="button is-white save" id="submitDeckChange">Update</button>
+                <button class="button is-dark cancel" id="cancelButton" type!="submit" value="Cancel">Cancel</button>
+                <button class="button is-danger" id="deleteDeck" type="submit">Delete</button>
+            </div>
+        </form>
+        </div>
+    </section>
+    `
 }
 
 export const loadNoHero = function () {
@@ -160,15 +242,15 @@ export const loadNoHero = function () {
       `
 }
 
-async function loadMap (theDeck) {
+async function loadMap(theDeck) {
     $root.empty();
     $nav.empty();
-    getCoordinates(theDeck.address, theDeck);    
+    getCoordinates(theDeck.address, theDeck);
 }
 
 
 
-async function getCoordinates (address, theDeck) {
+async function getCoordinates(address, theDeck) {
     L.mapbox.accessToken = 'pk.eyJ1IjoiY29tcDQyNmZpbmFsIiwiYSI6ImNrMzZidGNsZDAwMzEzbXJ4bXFnM3loYjgifQ.gyiwVu9eUjqg-If1v-gK0A';
     var geocoder = L.mapbox.geocoder('mapbox.places');
 
@@ -273,7 +355,7 @@ const setupUI = (user) => {
 
     } else {
         // hide account info
-        accountBody.innerHTML='';
+        accountBody.innerHTML = '';
 
         // toggle UI elements
         myAccount.style.display = 'none';
@@ -341,21 +423,21 @@ document.getElementById("autofillbutton").addEventListener('click', (e) => {
     e.preventDefault();
     var input = document.getElementById("myInput").value;
     var deck;
-    db.collection('decks').get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          var deckObjects = doc.data();
-          var address = deckObjects.address;
-          var spotname = deckObjects.deck;
-          
-            if(input == address) {
+    db.collection('decks').get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            var deckObjects = doc.data();
+            var address = deckObjects.address;
+            var spotname = deckObjects.deck;
+
+            if (input == address) {
                 deck = deckObjects;
                 loadMap(deck);
-            } 
-            if(input == spotname) {
+            }
+            if (input == spotname) {
                 deck = deckObjects;
                 loadMap(deck);
             }
         });
-        
-      });
+
+    });
 });
