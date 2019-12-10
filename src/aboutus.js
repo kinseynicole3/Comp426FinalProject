@@ -27,120 +27,17 @@ auth.onAuthStateChanged(user => {
 
     if (user) {
         db.collection('decks').onSnapshot(snapshot => {
-            setupDecksWithEdit(snapshot.docs);
+            // setupDecksWithEdit(snapshot.docs);
             setupUI(user);
         });
     } else {
         db.collection('decks').onSnapshot(snapshot => {
-            setupDecksWithoutEdit(snapshot.docs);
+            // setupDecksWithoutEdit(snapshot.docs);
             setupUI();
         });
     }
 });
 
-// create new deck
-const createForm = document.querySelector('#createForm');
-const createButton = document.querySelector('#createDeckButton')
-createDeckButton.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    db.collection('decks').add({
-        deck: createForm['deck'].value,
-        address: createForm['address'].value,
-        notes: createForm['notes'].value
-    }).then(() => {
-        // close modal and reset form
-        const modal = document.querySelector('#createDeckModal');
-        modal.style.display = 'none';
-        createForm.reset();
-    })
-
-})
-
-// render decks
-const deckList = document.querySelector('.decks');
-
-const setupDecksWithoutEdit = (data) => {
-
-
-    let html = '';
-    data.forEach(doc => {
-        const theDeck = doc.data();
-        const div = `  
-        <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
-            <article class="tile is-child notification is-light">
-                <div class="content has-text-left">
-                    <button class="button deckname" id="${theDeck.deck}">${theDeck.deck}</button>
-                    <p class="subtitle">${theDeck.address}</h2>
-                    <p class="subtitle">Notes: ${theDeck.notes}</p>
-                </div>
-                <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
-                    
-                </div>
-            </article>
-        </div>
-        `;
-        html += div;
-    });
-
-    deckList.innerHTML = html;
-
-    data.forEach(doc => {
-        const theDeck = doc.data();
-        const deckName = document.getElementById(theDeck.deck);
-        deckName.addEventListener('click', (e) => {
-            e.preventDefault();
-            loadMap(theDeck);
-        });
-    });
-
-}
-
-// const deckList = document.querySelector('.decks');
-
-const setupDecksWithEdit = (data) => {
-
-    let html = '';
-    data.forEach(doc => {
-        const theDeck = doc.data();
-        const div = `  
-        <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
-            <article class="tile is-child notification is-light">
-                <div class="content has-text-left">
-                    <button class="button deckname" id="${theDeck.deck}">${theDeck.deck}</button>
-                    <p class="subtitle">${theDeck.address}</h2>
-                    <p class="subtitle">Notes: ${theDeck.notes}</p>
-                </div>
-                <div class="content has-text-right" style="padding-top: 20px; padding-right: 20px; padding-bottom: 20px;">
-                    <button id="${doc.id}"class="button is-primary edit">Edit</button>
-                </div>
-            </article>
-        </div>
-        `;
-        html += div;
-    });
-
-    deckList.innerHTML = html;
-
-    data.forEach(doc => {
-        const theDeck = doc.data();
-        const editID = document.getElementById(doc.id);
-        editID.addEventListener('click', (e) => {
-            e.preventDefault();
-            loadDeckEditForm(data, doc.id);
-        });
-    });
-
-    data.forEach(doc => {
-        const theDeck = doc.data();
-        const deckName = document.getElementById(theDeck.deck);
-        deckName.addEventListener('click', (e) => {
-            e.preventDefault();
-            loadMap(theDeck);
-        });
-    });
-
-}
 
 export const loadDeckEditForm = function (data, id) {
     $root.empty();
@@ -238,21 +135,21 @@ export const loadNoHero = function () {
       </div>
       <div id="navbarMenuHeroA" class="navbar-menu">
         <div class="navbar-end">
-        <a class="navbar-item" id="myAccount" style="display: none;">
-        My Account
-      </a>
-      <a class="navbar-item" class="loggedIn" id="logout" style="display: none;">
-        Logout
-      </a>
-      <a class="navbar-item" class="loggedIn" id="createDeck" style="display: none;">
-        Create Deck
-      </a>
-      <a class="navbar-item" class="loggedOut" id="login" style="display: none;">
-        Login
-      </a>
-      <a class="navbar-item" class="loggedOut" id="signup" style="display: none;">
-        Sign Up
-      </a>
+          <a class="navbar-item" id="myAccount">
+            My Account
+          </a>
+          <a class="navbar-item" class="loggedIn" id="logout">
+            Logout
+          </a>
+          <a class="navbar-item" class="loggedIn" id="createDeck">
+            Create Deck
+          </a>
+          <a class="navbar-item" class="loggedOut" id="login">
+            Login
+          </a>
+          <a class="navbar-item" class="loggedOut" id="signup">
+            Sign Up
+          </a>
 
         </div>
       </div>
@@ -432,27 +329,3 @@ loginButton.addEventListener('click', (e) => {
         loginForm.reset();
     })
 })
-
-//event listener on the submit button, call loadMap with that 
-document.getElementById("autofillbutton").addEventListener('click', (e) => {
-    e.preventDefault();
-    var input = document.getElementById("myInput").value;
-    var deck;
-    db.collection('decks').get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            var deckObjects = doc.data();
-            var address = deckObjects.address;
-            var spotname = deckObjects.deck;
-
-            if (input == address) {
-                deck = deckObjects;
-                loadMap(deck);
-            }
-            if (input == spotname) {
-                deck = deckObjects;
-                loadMap(deck);
-            }
-        });
-
-    });
-});
