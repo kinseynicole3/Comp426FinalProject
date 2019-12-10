@@ -340,8 +340,8 @@ const setupUI = (user) => {
         // account info
         db.collection('users').doc(user.uid).get().then(doc => {
             const html = `
-            <div> Email: ${user.email}</div>
-            <div> Name: ${doc.data().name}</div>
+            <div> <b> Email: </b> ${user.email}</div> <br>
+            <div> <b> Name: </b> ${doc.data().name}</div>
             `;
             accountBody.innerHTML = html;
         })
