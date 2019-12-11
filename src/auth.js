@@ -147,8 +147,10 @@ export const loadDeckEditForm = function (data, id) {
     $root.empty();
     $hero.empty();
     let deckToEdit;
+    let global_doc;
     data.forEach(doc => {
         if (doc.id == id) {
+            global_doc = doc;
             deckToEdit = doc.data();
         }
     });
@@ -165,6 +167,8 @@ export const loadDeckEditForm = function (data, id) {
             address: newAddress,
             notes: newNotes
         });
+        
+        setupDecksWithEdit(data);
         $hero.append(loadHero());
     });
 
