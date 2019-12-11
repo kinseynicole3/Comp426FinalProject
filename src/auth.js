@@ -67,7 +67,8 @@ const setupDecksWithoutEdit = (data) => {
     data.forEach(doc => {
         const theDeck = doc.data();
         const div = `  
-        <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
+        <div class="tile is-parent" style="min-width: 33%; max-width: 33% word-break: break-word; 
+        width: 500px;">
             <article class="tile is-child notification is-light">
                 <div class="content has-text-left">
                     <button class="button deckname" id="${theDeck.deck}">${theDeck.deck}</button>
@@ -104,7 +105,8 @@ const setupDecksWithEdit = (data) => {
     data.forEach(doc => {
         const theDeck = doc.data();
         const div = `  
-        <div class="tile is-parent" style="min-width: 33%; max-width: 33%">
+        <div class="tile is-parent" style="min-width: 33%; max-width: 33% word-break: break-word; 
+        width: 500px;">
             <article class="tile is-child notification is-light">
                 <div class="content has-text-left">
                     <button class="button deckname" id="${theDeck.deck}">${theDeck.deck}</button>
