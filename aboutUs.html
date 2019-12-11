@@ -37,19 +37,19 @@
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
               <div class="navbar-end">
-                <a class="navbar-item" id="myAccount">
+                <a class="navbar-item" id="myAccount" style="display: none;">
                   My Account
                 </a>
-                <a class="navbar-item" class="loggedIn" id="logout">
+                <a class="navbar-item" class="loggedIn" id="logout" style="display: none;">
                   Logout
                 </a>
-                <a class="navbar-item" class="loggedIn" id="createDeck">
+                <a class="navbar-item" class="loggedIn" id="createDeck" style="display: none;">
                   Create Deck
                 </a>
-                <a class="navbar-item" class="loggedOut" id="login">
+                <a class="navbar-item" class="loggedOut" id="login" style="display: none;">
                   Login
                 </a>
-                <a class="navbar-item" class="loggedOut" id="signup">
+                <a class="navbar-item" class="loggedOut" id="signup" style="display: none;">
                   Sign Up
                 </a>
   
@@ -67,8 +67,8 @@
     </div>
   </section>
 
-  <!-- My Account Modal -->
-  <div class="modal" id=myAccountModal>
+   <!-- My Account Modal -->
+   <div class="modal" id=myAccountModal>
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -77,7 +77,7 @@
       </header>
       <section class="modal-card-body">
         <!-- Content ... -->
-        <p>this is a modal</p>
+        <div id="accountBody" style="color: black"></div>
       </section>
       <footer class="modal-card-foot">
       </footer>
@@ -273,7 +273,8 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="src/index.js" type="module"></script>
-  <script src="src/auth.js" type="module"></script>
+  <!-- <script src="src/auth.js" type="module"></script> -->
+  <script src="src/aboutus.js" type="module"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 
