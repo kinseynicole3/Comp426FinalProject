@@ -1,6 +1,6 @@
 export const $root = $('#root');
 export const $maps = $('#maps');
-export const $nav = $('#nav');
+export const $hero = $('#hero');
 
 export const myAccount = document.querySelector('#myAccount');
 export const logout = document.querySelector('#logout');
@@ -21,10 +21,10 @@ export const accountBody = document.querySelector('#accountBody')
 //         setupUI();
 //     // });
 // }
-
+let global_user;
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
-
+    global_user = user;
     if (user) {
         db.collection('decks').onSnapshot(snapshot => {
             setupDecksWithEdit(snapshot.docs);
@@ -61,7 +61,6 @@ createDeckButton.addEventListener('click', (e) => {
 const deckList = document.querySelector('.decks');
 
 const setupDecksWithoutEdit = (data) => {
-
 
     let html = '';
     data.forEach(doc => {
@@ -146,8 +145,7 @@ const setupDecksWithEdit = (data) => {
 
 export const loadDeckEditForm = function (data, id) {
     $root.empty();
-    $nav.empty();
-    $nav.append(loadNoHero());
+    $hero.empty();
     let deckToEdit;
     data.forEach(doc => {
         if (doc.id == id) {
@@ -155,8 +153,6 @@ export const loadDeckEditForm = function (data, id) {
         }
     });
     $root.append(getEditForm(deckToEdit));
-    // var database = firebase.database();
-    let path = "-decks/" + id;
 
     $(document).on("click", ".save", function (event) {
         let newName = document.getElementById("newDeckName").value;
@@ -169,7 +165,7 @@ export const loadDeckEditForm = function (data, id) {
             address: newAddress,
             notes: newNotes
         });
-
+        $hero.append(loadHero());
     });
 
     $(document).one("click", "#deleteDeck", function (event) {
@@ -208,7 +204,7 @@ export const getEditForm = function (theDeck) {
                 </div>
             </div>
             <div class="content has-text-right">
-                <button class="button is-white save" id="submitDeckChange">Update</button>
+                <button class="button is-white save" id="submitDeckChange" href="index.html">Update</button>
                 <button class="button is-dark cancel" id="cancelButton" type!="submit" value="Cancel">Cancel</button>
                 <button class="button is-danger" id="deleteDeck" type="submit">Delete</button>
             </div>
@@ -218,55 +214,27 @@ export const getEditForm = function (theDeck) {
     `
 }
 
-export const loadNoHero = function () {
+export const loadHero = function () {
     return `
-    <nav class="navbar is-fixed-top" style="background-color: hsl(171, 90%, 35%); border-bottom-style: solid; border-color: white; border-bottom-width: 1.5px;">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item">
-          <h2 class="subtitle is-2">SPARC</h2>
-        </a>
-        <a class="navbar-item" href="index.html">
-          Home
-        </a>
-        <a class="navbar-item" id="aboutUs" href="aboutUs.html">
-          About Us
-        </a>
-        <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-      </div>
-      <div id="navbarMenuHeroA" class="navbar-menu">
-        <div class="navbar-end">
-        <a class="navbar-item" id="myAccount" style="display: none;">
-        My Account
-      </a>
-      <a class="navbar-item" class="loggedIn" id="logout" style="display: none;">
-        Logout
-      </a>
-      <a class="navbar-item" class="loggedIn" id="createDeck" style="display: none;">
-        Create Deck
-      </a>
-      <a class="navbar-item" class="loggedOut" id="login" style="display: none;">
-        Login
-      </a>
-      <a class="navbar-item" class="loggedOut" id="signup" style="display: none;">
-        Sign Up
-      </a>
-
+    <div class="hero-body" id="hero-body" style="background-image: url('gps.jpg'); background-position: center; background-repeat: no-repeat; background-size: cover; overflow: hidden;">
+      <div class="container has-text-centered" style="background: hsla(0, 0%, 96%, 0.68); width: 500px; padding: 40px;">
+        <h1 class="subtitle is-2" style="color: #494949">Find Parking at UNC</h1>
+        <div class="content has-text-centered">
+          <form autocomplete="off" action="/action_page.php">
+            <div class="autocomplete">
+              <input class="input" id="myInput" type="text" placeholder="Address" name="myAddress" style="width: 70%">
+              <button class="button" id = "autofillbutton" type="submit" value="Search">Submit</button>
+            </div>
         </div>
+        </form>
       </div>
     </div>
-  </nav>
-
-      `
+    `
 }
 
 async function loadMap(theDeck) {
     $root.empty();
-    $nav.empty();
+    $hero.empty();
     getCoordinates(theDeck.address, theDeck);
 }
 
@@ -280,7 +248,6 @@ async function getCoordinates(address, theDeck) {
 
     function showMap(err, data) {
         if (data.latlng) {
-            $nav.append(loadNoHero());
             $maps.append(renderMap(theDeck, data.latlng[0], data.latlng[1]));
         }
     }
