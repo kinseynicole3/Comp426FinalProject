@@ -83,3 +83,7 @@ a:hover {
     color: #494949;
     background-color: #F5F5F5;
 }
+
+.autocomplete-items {
+    color: grey;
+}
